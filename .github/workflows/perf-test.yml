@@ -1,5 +1,8 @@
 name: perf-test
 
+env:
+  PULUMI_ACCESS_TOKEN: 'fake-as-only-using-local-state'
+
 on:
   push:
 
