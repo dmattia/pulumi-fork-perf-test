@@ -12,4 +12,5 @@ jobs:
         with:
           node-version: '14.17.3'
       - run: yarn install
+      - run: yarn exec pulumi login --local
       - run: yarn exec pulumi preview
