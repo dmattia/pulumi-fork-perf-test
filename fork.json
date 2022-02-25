@@ -1,7 +1,7 @@
 {
     "name": "aws-typescript",
     "resolutions": {
-      "@pulumi/pulumi": "npm:@transcend-io/pulumi@=1.0.19"
+      "@pulumi/pulumi": "npm:@transcend-io/pulumi@=1.0.20"
     },
     "devDependencies": {
         "@types/node": "^14"
