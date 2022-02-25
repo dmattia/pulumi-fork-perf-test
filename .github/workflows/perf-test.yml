@@ -1,7 +1,7 @@
 name: perf-test
 
 env:
-  PULUMI_ACCESS_TOKEN: 'fake-as-only-using-local-state'
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
 on:
   push:
@@ -15,5 +15,4 @@ jobs:
         with:
           node-version: '14.17.3'
       - run: yarn install
-      - run: yarn exec pulumi login --local
       - run: yarn exec pulumi preview
