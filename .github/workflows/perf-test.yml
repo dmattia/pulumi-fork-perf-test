@@ -30,4 +30,5 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
 
       # Run pulumi preview
-      - run: yarn exec pulumi preview --stack dev
+      - run: yarn exec pulumi stack select dev
+      - run: yarn exec pulumi preview
