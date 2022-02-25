@@ -1,8 +1,5 @@
 name: perf-test
 
-env:
-  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
 on:
   push:
 
@@ -15,7 +12,7 @@ jobs:
       # Install node deps using caching
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.17.3'
+          node-version: 14.x
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -29,6 +26,18 @@ jobs:
       - run: yarn install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
 
+      # Login to AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       # Run pulumi preview
-      - run: yarn exec pulumi stack select dev
-      - run: yarn exec pulumi preview
+      - uses: pulumi/actions@v3
+        with:
+          command: preview
+          stack-name: dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
