@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        packageJson: ['package.json', 'package.json.fork']
+        packageJson: ['upstream', 'fork']
         # trial: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         trial: [1, 2, 3]
     steps:
       - uses: actions/checkout@v2
 
       # Use the package.json either with the resolutions or without
-      - run: mv ${{ matrix.packageJson }} package.json
+      - run: mv ${{ matrix.packageJson }}.json package.json
 
       # Install node deps using caching
       - uses: actions/setup-node@v2
